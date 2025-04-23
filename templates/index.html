@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropSense - Your Personalized Farming Companion</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Hero Section Animation */
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('/static/1.jpg') center/cover;
+            animation: heroReveal 0.8s ease-out;
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        @keyframes heroReveal {
+            0% {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Hover Effect for Cards */
+        .card-hover {
+            transition: transform 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Scroll Animation */
+        .scroll-animation {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .scroll-animation.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Bounce Animation */
+        @keyframes bounceEffect {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .bounce {
+            animation: bounceEffect 2s infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        /* Glass Morphism Hover Effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .glass-effect:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Input Field Glow Effect */
+        input:focus,
+        select:focus {
+            border-color: green;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+            outline: none;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        /* Button Shiny Swipe Hover Effect */
+        button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease-in-out;
+        }
+
+        button:hover::after {
+            left: 100%;
+        }
+
+        .lottie-container {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(-20px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(-5px);
+            }
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            animation: float 4s infinite ease-in-out alternate;
+        }
+
+        .particle1 {
+            width: 50px;
+            height: 50px;
+            top: 10%;
+            left: 15%;
+            animation-duration: 6s;
+        }
+
+        .particle2 {
+            width: 30px;
+            height: 30px;
+            top: 50%;
+            left: 70%;
+            animation-duration: 5s;
+        }
+
+        .particle3 {
+            width: 40px;
+            height: 40px;
+            top: 80%;
+            left: 30%;
+            animation-duration: 7s;
+        }
+        /* Hero Section Animation */
+.hero-bg {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('/static/1.jpg') center/cover;
+    animation: heroReveal 0.8s ease-out;
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+@keyframes heroReveal {
+    0% {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Hover Effect for Cards */
+.card-hover {
+    transition: transform 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+}
+
+/* Scroll Animation */
+.scroll-animation {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.scroll-animation.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Bounce Animation */
+@keyframes bounceEffect {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.bounce {
+    animation: bounceEffect 2s infinite;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Glass Morphism Hover Effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.glass-effect:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Input Field Glow Effect */
+input:focus,
+select:focus {
+    border-color: green;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+    outline: none;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Button Shiny Swipe Hover Effect */
+button {
+    position: relative;
+    overflow: hidden;
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.5s ease-in-out;
+}
+
+button:hover::after {
+    left: 100%;
+}
+
+.lottie-container {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+/* Particle styles */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: float 4s infinite ease-in-out alternate;
+    z-index: 10; /* Ensure particles appear above other content */
+    pointer-events: none; /* Allow clicking through particles */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+}
+
+/* Particle styles */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: float 4s infinite ease-in-out alternate;
+    z-index: 10; /* Ensure particles appear above other content */
+    pointer-events: none; /* Allow clicking through particles */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+}
+
+/* Particles with different shades of green */
+.particle1 {
+    width: 50px;
+    height: 50px;
+    top: 10%;
+    left: 15%;
+    animation-duration: 6s;
+    background: rgba(34, 197, 94, 0.9); /* Medium green */
+}
+
+.particle2 {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 70%;
+    animation-duration: 5s;
+    background: rgba(16, 185, 129, 0.9); /* Emerald green */
+}
+
+.particle3 {
+    width: 40px;
+    height: 40px;
+    top: 80%;
+    left: 30%;
+    animation-duration: 7s;
+    background: rgba(5, 150, 105, 0.9); /* Dark teal green */
+}
+
+/* Additional Particles with green shades */
+.particle4 {
+    width: 25px;
+    height: 25px;
+    top: 30%;
+    left: 85%;
+    animation-duration: 8s;
+    background: rgba(52, 211, 153, 0.9); /* Light teal green */
+}
+
+.particle5 {
+    width: 35px;
+    height: 35px;
+    top: 65%;
+    left: 5%;
+    animation-duration: 9s;
+    background: rgba(74, 222, 128, 0.9); /* Bright lime green */
+}
+
+.particle6 {
+    width: 22px;
+    height: 22px;
+    top: 15%;
+    left: 55%;
+    animation-duration: 7.5s;
+    background: rgba(22, 163, 74, 0.9); /* Forest green */
+}
+
+.particle7 {
+    width: 45px;
+    height: 45px;
+    top: 85%;
+    left: 60%;
+    animation-duration: 6.5s;
+    background: rgba(132, 204, 22, 0.9); /* Yellow-green */
+}
+
+.particle8 {
+    width: 18px;
+    height: 18px;
+    top: 25%;
+    left: 40%;
+    animation-duration: 5.5s;
+    background: rgba(101, 163, 13, 0.9); /* Olive green */
+}
+
+.particle9 {
+    width: 55px;
+    height: 55px;
+    top: 75%;
+    left: 20%;
+    animation-duration: 10s;
+    background: rgba(20, 83, 45, 0.9); /* Deep forest green */
+}
+
+.particle10 {
+    width: 20px;
+    height: 20px;
+    top: 45%;
+    left: 90%;
+    animation-duration: 4.5s;
+    background: rgba(167, 243, 208, 0.9); /* Mint green */
+}
+
+/* Particle container to ensure proper positioning */
+.particle-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+        /* Dark mode styles */
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        
+        .dark-mode nav {
+            background-color: #1e4620 !important;
+        }
+        
+        .dark-mode .text-gray-800 {
+            color: #f0f0f0;
+        }
+        
+        .dark-mode .bg-gray-50 {
+            background-color: #1a1a1a;
+        }
+        
+        .dark-mode .bg-white {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+        
+        /* Toggle switch styles */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-top: 8px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: #333;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .mode-label {
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full text-white z-50" style="background-color: #2CB42C; opacity: 0.95;">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col">
+                    <div class="flex items-center">
+                        <img src="/static/2.png" alt="Logo" class="h-10 w-10 rounded-full">
+                        <span class="ml-3 text-2xl font-bold">CropSense</span>
+                    </div>
+                    <!-- Dark Mode Toggle -->
+                    <div class="flex items-center mt-2">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="mode-label" id="modeText">Light Mode</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-green-200">Home</a>
+                    <a href="#features" class="hover:text-green-200">Features</a>
+                    <a href="#recommendationForm" class="hover:text-green-200">Get Started</a>
+                    <a href="#contact" class="hover:text-green-200">Contact</a>
+                </div>
+
+                <!-- User Info Section -->
+                <div class="flex items-center space-x-6">
+                    <div id="user-info" class="hidden md:flex items-center space-x-2">
+                        <img id="user-avatar" src="/static/default-avatar.png" alt="User" class="h-8 w-8 rounded-full">
+                        <span id="user-name" class="text-white text-lg font-semibold"></span>
+                    </div>
+                    <button class="bg-white text-green-700 px-4 py-2 rounded-lg hover:bg-gray-200" id="auth-btn">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg flex items-center justify-center text-white">
+        <div class="text-center">
+            <h1 class="text-9xl md:text-10xl font-bold text-white bounce">Your Personalized Farming Companion</h1>
+            <p class="text-2xl md:text-3xl mb-8">CropSense</p>
+            <a href="#recommendationForm"
+                class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-xl inline-block transition-colors">
+                Get Started
+            </a>
+        </div>
+    </section>
+
+    <div id="lottie-animation" class="lottie-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+    <script>
+        var animation = bodymovin.loadAnimation({
+            container: document.getElementById('lottie-animation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '/static/ab.json'
+        })
+        ;document.addEventListener("DOMContentLoaded", function () {
+    const authBtn = document.getElementById('auth-btn');
+    const userName = document.getElementById('user-name');
+    const userAvatar = document.getElementById('user-avatar');
+    const userInfo = document.getElementById('user-info');
+    
+    // Fetch current user data from server
+    function fetchUserData() {
+        fetch('/api/me', {
+            credentials: 'include' // Includes cookies for session-based auth
+        })
+        .then(response => response.json())
+        .then(userData => {
+            if (userData && userData.authenticated) {
+                // User is logged in
+                showLoggedInState(userData);
+            } else {
+                // User is not logged in
+                showLoggedOutState();
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching user data:", error);
+            showLoggedOutState();
+        });
+    }
+    
+    function showLoggedInState(userData) {
+        // Remove any existing event listeners
+        authBtn.removeEventListener("click", handleSignIn);
+        
+        // Show logged-in user's info
+        userName.textContent = userData.username || "John Doe";
+        userAvatar.src = userData.avatar || "/static/default-avatar.png";
+        userInfo.classList.remove('hidden');
+        authBtn.textContent = "Sign Out";
+        
+        // Add sign-out event listener
+        authBtn.addEventListener("click", handleSignOut);
+    }
+    
+    function showLoggedOutState() {
+        // Remove any existing event listeners
+        authBtn.removeEventListener("click", handleSignOut);
+        
+        // Hide user info, show sign in button
+        userInfo.classList.add('hidden');
+        authBtn.textContent = "Sign In";
+        
+        // Add sign-in event listener
+        authBtn.addEventListener("click", handleSignIn);
+    }
+    
+    function handleSignOut(event) {
+        event.preventDefault();
+        fetch('/api/logout', {
+            method: 'POST',
+            credentials: 'include'
+        })
+        .then(() => {
+            window.location.href = '/'; // Redirect after logout
+        });
+    }
+    
+    function handleSignIn(event) {
+        event.preventDefault();
+        window.location.href = '/sign.html';
+    }
+    
+    // Fetch user data when page loads
+    fetchUserData();
+    
+    // Dark Mode Toggle Functionality remains the same
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const modeText = document.getElementById('modeText');
+    
+    const darkMode = localStorage.getItem('darkMode');
+    
+    if (darkMode === 'enabled') {
+        body.classList.add('dark-mode');
+        darkModeToggle.checked = true;
+        modeText.textContent = 'Dark Mode';
+    }
+    
+    darkModeToggle.addEventListener('change', function() {
+        if (this.checked) {
+            body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+            modeText.textContent = 'Dark Mode';
+        } else {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', null);
+            modeText.textContent = 'Light Mode';
+        }
+    });
+});
+</script>
+</body>
+</html>
+<section id="features" class="py-28 bg-gradient-to-b from-white to-green-50">
+    <div class="container mx-auto px-8">
+        <h2 class="text-5xl font-extrabold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-teal-500" style="font-family: 'Poppins', sans-serif;">
+            Our Features
+        </h2>
+        <p class="text-center text-xl text-gray-600 mb-20 max-w-3xl mx-auto">Helping farmers make smarter decisions with AI-powered tools and personalized recommendations 🌱</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Feature 1 -->
+            <div class="feature-card scroll-animation">
+                <div class="feature-icon mb-6">
+                    <div class="bg-gradient-to-r from-green-400 to-teal-500 rounded-full p-5 w-20 h-20 flex items-center justify-center mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex justify-center mb-8 overflow-hidden rounded-xl feature-image-container">
+                    <img src="/static/ai.jpg" alt="AI" class="w-full h-72 object-cover feature-image">
+                </div>
+                <h3 class="text-3xl font-bold text-green-700 mb-4 text-center">AI-Powered Insights</h3>
+                <p class="text-xl text-gray-600 text-center">
+                    Get personalized crop recommendations based on your soil type and local conditions.
+                </p>
+                <div class="mt-6 flex justify-center">
+                    <span class="bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full">Smart Analytics</span>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card scroll-animation">
+                <div class="feature-icon mb-6">
+                    <div class="bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full p-5 w-20 h-20 flex items-center justify-center mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex justify-center mb-8 overflow-hidden rounded-xl feature-image-container">
+                    <img src="/static/w.jpg" alt="Weather" class="w-full h-72 object-cover feature-image">
+                </div>
+                <h3 class="text-3xl font-bold text-blue-600 mb-4 text-center">Market Demand Prediction</h3>
+                <p class="text-xl text-gray-600 text-center">
+                    Predict which crops will be in high demand in the market.
+                </p>
+                <div class="mt-6 flex justify-center">
+                    <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full">Trend Analysis</span>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card scroll-animation">
+                <div class="feature-icon mb-6">
+                    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-5 w-20 h-20 flex items-center justify-center mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex justify-center mb-8 overflow-hidden rounded-xl feature-image-container">
+                    <img src="/static/f.jpg" alt="Market" class="w-full h-72 object-cover feature-image">
+                </div>
+                <h3 class="text-3xl font-bold text-yellow-600 mb-4 text-center">Crop Rotation Suggestion</h3>
+                <p class="text-xl text-gray-600 text-center">
+                    Recommends the best crop rotation strategies for soil health.
+                </p>
+                <div class="mt-6 flex justify-center">
+                    <span class="bg-yellow-100 text-yellow-800 text-sm font-semibold px-4 py-2 rounded-full">Soil Optimization</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Feature Card Styling - Enhanced Cute Version */
+    .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+        min-height: 520px;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid transparent;
+    }
+
+    /* Hover Effect */
+    .feature-card:hover {
+        transform: translateY(-15px);
+        border-color: rgba(72, 187, 120, 0.3);
+        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Feature Icon Animation */
+    .feature-icon {
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover .feature-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+    
+    /* Image Container Effects */
+    .feature-image-container {
+        position: relative;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover .feature-image-container {
+        box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    
+    .feature-image {
+        transition: transform 0.6s ease;
+    }
+    
+    .feature-card:hover .feature-image {
+        transform: scale(1.08);
+    }
+    
+    /* Scroll Animation */
+    .scroll-animation {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .scroll-animation.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Click Animation */
+    .feature-card:active {
+        transform: scale(0.98) translateY(-10px);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const elements = document.querySelectorAll(".scroll-animation");
+    
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add("visible");
+                    }, index * 200); // Adds delay for staggered effect
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+    
+        elements.forEach(element => observer.observe(element));
+        
+        // Add floating animation to feature cards
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        featureCards.forEach((card) => {
+            // Create subtle floating animation
+            setInterval(() => {
+                const randomY = Math.random() * 5;
+                card.style.transform = `translateY(-${randomY}px)`;
+                
+                setTimeout(() => {
+                    card.style.transform = 'translateY(0)';
+                }, 1500);
+            }, 3000);
+        });
+    });        
+</script>
+    <div class="particle particle1"></div>
+<div class="particle particle2"></div>
+<div class="particle particle3"></div>
+<div class="particle particle4"></div>
+<div class="particle particle5"></div>
+<div class="particle particle6"></div>
+<div class="particle particle7"></div>
+<div class="particle particle8"></div>
+<div class="particle particle9"></div>
+<div class="particle particle10"></div>
+<body class="bg-green-50">
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-10 transform transition-all hover:scale-[1.01]">
+        <!-- Enhanced Title with Badge -->
+        <div class="text-center mb-8">
+            <span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-semibold mb-3">AI ASSISTANT</span>
+            <h2 class="text-4xl font-bold text-green-800 mb-2">Get Your Crop Recommendations</h2>
+            <p class="text-gray-600 text-xl">Enter your farm's data below for personalized crop suggestions</p>
+        </div>
+        <div class="mt-4">
+            <a href="{{ url_for('history') }}" class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                View Recommendation History
+            </a>
+        </div>
+        
+        <!-- Form Section with Improved Styling -->
+        <form id="recommendationForm" class="space-y-8" method="POST" action="/predict">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Modified name Field - Now Optional -->
+                <div>
+                    <label for="city" class="block text-gray-700 text-xl font-semibold mb-3">
+                      City <span class="text-gray-500 text-sm">(Optional)</span>
+                    </label>
+                    <div class="relative">
+                      <input list="cityList" id="city" name="city"
+                             class="w-full p-4 text-xl border border-gray-300 bg-gray-50 rounded-lg focus:ring-2 focus:ring-green-500 transition-all"
+                             placeholder="Type or select a city" oninput="autoFillClimate()">
+                      <datalist id="cityList">
+                        <option value="New Delhi">
+                            <option value="Mumbai">
+                            <option value="Bangalore">
+                            <option value="Chennai">
+                            <option value="Kolkata">
+                            <option value="Hyderabad">
+                            <option value="Pune">
+                            <option value="Ahmedabad">
+                            <option value="Jaipur">
+                            <option value="Lucknow">
+                            <option value="Bhopal">
+                            <option value="Patna">
+                            <option value="Chandigarh">
+                            <option value="Thiruvananthapuram">
+                            <option value="Nagpur">
+                            <option value="Indore">
+                            <option value="Guwahati">
+                            <option value="Ranchi">
+                            <option value="Raipur">
+                            <option value="Dehradun">
+                            <option value="Shimla">
+                            <option value="Srinagar">
+                            <option value="Agra">
+                            <option value="Varanasi">
+                            <option value="Amritsar">                            
+                      </datalist>
+                      <div id="cityStatus" class="hidden absolute right-3 top-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">
+                      Selecting a city will auto-fill temperature, humidity, and rainfall.
+                    </p>
+                  </div>
+          
+                  <div class="hidden md:block"></div>
+
+                <div>
+                    <label class="block text-gray-700 text-xl font-semibold mb-3" for="N">Nitrogen (N)</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">N</span>
+                        </div>
+                        <input type="number" id="N" name="N" required 
+                               class="pl-8 w-full p-4 text-lg border border-gray-300 bg-gray-50 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 text-xl font-semibold mb-3" for="P">Phosphorus (P)</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">P</span>
+                        </div>
+                        <input type="number" id="P" name="P" required 
+                               class="pl-8 w-full p-4 text-lg border border-gray-300 bg-gray-50 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-xl font-semibold mb-3" for="K">Potassium (K)</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">K</span>
+                        </div>
+                        <input type="number" id="K" name="K" required 
+                               class="pl-8 w-full p-4 text-lg border border-gray-300 bg-gray-50 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-xl font-semibold mb-3" for="temperature">Temperature (°C)</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">°C</span>
+                        </div>
+                        <input type="number" id="temperature" name="temperature" step="0.1" required
+                               class="pl-8 w-full p-4 text-lg border border-gray-300 bg-gray-50 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-xl font-semibold mb-3" for="humidity">Humidity (%)</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">%</span>
+                        </div>
+                        <input type="number" id="humidity" name="humidity" required 
+                               class="pl-8 w-full p-4 text-lg border border-gray-300 bg-gray-50 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-xl font-semibold mb-3" for="ph">Soil pH</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">pH</span>
+                        </div>
+                        <input type="number" id="ph" name="ph" step="0.1" required 
+                               class="pl-8 w-full p-4 text-lg border border-gray-300 bg-gray-50 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-xl font-semibold mb-3" for="rainfall">Rainfall (mm)</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">mm</span>
+                        </div>
+                        <input type="number" id="rainfall" name="rainfall" required 
+                               class="pl-8 w-full p-4 text-lg border border-gray-300 bg-gray-50 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Improved Button with Gradient and Animation -->
+            <button type="submit" 
+                    class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-4 text-lg font-medium transition-all transform hover:translate-y-[-2px] hover:shadow-lg">
+                Get Recommendations
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </form>
+
+        <!-- Enhanced Loader with Animation -->
+        <div id="loader" class="hidden mt-6 text-center">
+            <div class="inline-block w-12 h-12">
+                <svg class="animate-spin h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </div>
+            <p class="mt-3 text-green-700 font-medium">Analyzing your farm data...</p>
+        </div>
+
+        <!-- Enhanced Cute Output Section - Larger Text Size -->
+<div id="resultContainer" class="mt-8 p-6 rounded-lg border-2 border-green-400 bg-gradient-to-br from-green-50 to-blue-50 {% if prediction or error or show_result %}block{% else %}hidden{% endif %} shadow-lg transform transition-all duration-300 hover:scale-102">
+    <div class="flex items-center">
+        {% if error %}
+            <div class="bg-red-500 rounded-full p-3 mr-5 shadow-lg animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+            <h3 class="text-3xl font-bold text-red-800">{{ error }}</h3>
+        {% elif prediction %}
+            <div class="bg-gradient-to-r from-green-500 to-teal-500 rounded-full p-4 mr-5 shadow-lg animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <div>
+                <h3 class="text-3xl font-bold text-green-800">Recommended Crop:</h3>
+                <p class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-teal-500">{{ prediction }}</p>
+                {% if city %}
+                    <p class="text-lg text-green-700 mt-1">
+                        <span class="inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Location: <span class="font-medium">{{ city }}</span>
+                        </span>
+                    </p>
+                {% endif %}
+                {% if form_data.get('label') %}
+                    <p class="text-lg text-green-700">
+                        <span class="inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Field: <span class="font-medium">{{ form_data.get('label') }}</span>
+                        </span>
+                    </p>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="bg-blue-500 rounded-full p-3 mr-5 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="text-3xl font-bold text-blue-800">Your crop recommendation will appear here 🌱</h3>
+        {% endif %}
+    </div>
+    
+    {% if prediction and prediction.lower() in crop_details %}
+        <div class="mt-8 bg-white rounded-lg shadow-inner p-6 border border-green-200">
+            <h4 class="font-bold text-green-700 mb-5 text-2xl flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Crop Details:
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="p-5 rounded-lg bg-gradient-to-r from-green-50 to-green-100 border-l-4 border-green-500 transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <p class="font-semibold text-gray-700 flex items-center mb-3 text-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                        </svg>
+                        Type:
+                    </p>
+                    <p class="text-gray-800 ml-8 text-lg">{{ crop_details[prediction.lower()]['type'] }}</p>
+                </div>
+                <div class="p-5 rounded-lg bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-500 transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <p class="font-semibold text-gray-700 flex items-center mb-3 text-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                        Recommended Fertilizers:
+                    </p>
+                    <p class="text-gray-800 ml-8 text-lg">{{ crop_details[prediction.lower()]['fertilizers'] }}</p>
+                </div>
+                <div class="p-5 rounded-lg bg-gradient-to-r from-yellow-50 to-yellow-100 border-l-4 border-yellow-500 md:col-span-2 transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <p class="font-semibold text-gray-700 flex items-center mb-3 text-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                        </svg>
+                        Advantages:
+                    </p>
+                    <p class="text-gray-800 ml-8 text-lg">{{ crop_details[prediction.lower()]['advantages'] }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    
+    {% if alternatives %}
+        <div class="mt-8 p-5 bg-white rounded-lg shadow-inner border border-blue-200">
+            <h4 class="font-bold text-blue-700 mb-3 text-xl flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Alternative Options:
+            </h4>
+            <div class="bg-blue-50 p-4 rounded-md">
+                <p class="text-gray-700 text-lg">{{ alternatives }}</p>
+            </div>
+        </div>
+    {% elif not prediction and not error %}
+        <p class="mt-5 text-green-600 italic flex items-center justify-center text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Enter values for all fields above and click "Get Recommendations" to see the best crop for your farm 🌾
+        </p>
+    {% endif %}
+</div>
+    </div>
+    <!-- Enhanced Animation Script -->
+    <script>
+        document.getElementById("recommendationForm").addEventListener("submit", function() {
+            document.getElementById("loader").classList.remove("hidden");
+        });
+        
+        document.getElementById("recommendationForm").addEventListener("submit", function(event) {
+            let inputs = document.querySelectorAll("input[required], select[required]");
+            let valid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.classList.add("shake");
+                    input.style.borderColor = "#EF4444";
+                    setTimeout(() => {
+                        input.classList.remove("shake");
+                        input.style.borderColor = "";
+                    }, 500);
+                    valid = false;
+                }
+            });
+        
+            if (!valid) {
+                event.preventDefault();
+                const errorMsg = document.createElement("div");
+                errorMsg.className = "text-red-500 text-center font-medium mt-4 animate-pulse";
+                errorMsg.textContent = "Please fill all required fields! 🚨";
+                
+                // Remove any existing error message
+                const existingError = document.querySelector(".text-red-500.text-center");
+                if (existingError) existingError.remove();
+                
+                document.getElementById("recommendationForm").appendChild(errorMsg);
+                
+                // Auto remove the error message after 3 seconds
+                setTimeout(() => {
+                    errorMsg.remove();
+                }, 3000);
+            }
+        });
+        
+        // Add animation to input fields on focus
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach(input => {
+            input.addEventListener("focus", function() {
+                this.parentElement.classList.add("transform", "scale-[1.02]", "transition-all");
+            });
+            
+            input.addEventListener("blur", function() {
+                this.parentElement.classList.remove("transform", "scale-[1.02]");
+            });
+        });
+    </script>
+    <script>
+        const cityData = {
+            "New Delhi":            { temperature: 25.0, humidity: 60.0, rainfall: 800.0 },
+            "Mumbai":               { temperature: 27.5, humidity: 75.0, rainfall: 2400.0 },
+            "Bangalore":            { temperature: 24.0, humidity: 65.0, rainfall: 900.0 },
+            "Chennai":              { temperature: 30.0, humidity: 70.0, rainfall: 1200.0 },
+            "Kolkata":              { temperature: 26.5, humidity: 80.0, rainfall: 1600.0 },
+            "Hyderabad":            { temperature: 28.0, humidity: 55.0, rainfall: 850.0 },
+            "Pune":                 { temperature: 23.0, humidity: 50.0, rainfall: 700.0 },
+            "Ahmedabad":            { temperature: 32.0, humidity: 45.0, rainfall: 800.0 },
+            "Jaipur":               { temperature: 29.0, humidity: 40.0, rainfall: 600.0 },
+            "Lucknow":              { temperature: 26.0, humidity: 55.0, rainfall: 1000.0 },
+            "Bhopal":               { temperature: 27.0, humidity: 60.0, rainfall: 1100.0 },
+            "Patna":                { temperature: 28.5, humidity: 65.0, rainfall: 1300.0 },
+            "Chandigarh":           { temperature: 24.5, humidity: 50.0, rainfall: 1050.0 },
+            "Thiruvananthapuram":   { temperature: 29.5, humidity: 80.0, rainfall: 1650.0 },
+            "Nagpur":               { temperature: 30.0, humidity: 45.0, rainfall: 1000.0 },
+            "Indore":               { temperature: 26.5, humidity: 55.0, rainfall: 950.0 },
+            "Guwahati":             { temperature: 25.0, humidity: 85.0, rainfall: 2000.0 },
+            "Ranchi":               { temperature: 24.5, humidity: 70.0, rainfall: 1200.0 },
+            "Raipur":               { temperature: 28.0, humidity: 60.0, rainfall: 1300.0 },
+            "Dehradun":             { temperature: 23.5, humidity: 65.0, rainfall: 1100.0 },
+            "Shimla":               { temperature: 18.0, humidity: 55.0, rainfall: 1500.0 },
+            "Srinagar":             { temperature: 15.0, humidity: 50.0, rainfall: 700.0 },
+            "Agra":                 { temperature: 29.0, humidity: 55.0, rainfall: 850.0 },
+            "Varanasi":             { temperature: 27.0, humidity: 60.0, rainfall: 1000.0 },
+            "Amritsar":             { temperature: 22.0, humidity: 50.0, rainfall: 850.0 }
+          };
+    
+        function autoFillClimate() {
+          const city = document.getElementById("city").value;
+          const statusIcon = document.getElementById("cityStatus");
+    
+          if (cityData[city]) {
+            document.getElementById("temperature").value = cityData[city].temperature;
+            document.getElementById("humidity").value = cityData[city].humidity;
+            document.getElementById("rainfall").value = cityData[city].rainfall;
+            statusIcon.classList.remove("hidden");
+          } else {
+            document.getElementById("temperature").value = "";
+            document.getElementById("humidity").value = "";
+            document.getElementById("rainfall").value = "";
+            statusIcon.classList.add("hidden");
+          }
+        }
+      </script>
+</body>
+
+    <!-- JavaScript for Scroll Animation -->
+    <script>
+        document.addEventListener("scroll", function () {
+            const section = document.querySelector("#recommendations");
+            if (section.getBoundingClientRect().top < window.innerHeight - 50) {
+                section.classList.add("fade-in");
+                section.style.opacity = 1;
+                section.style.transform = "translateY(0)";
+            }
+        });
+            document.getElementById("recommendationForm").addEventListener("submit", function(event) {
+            let inputs = document.querySelectorAll("input[required], select[required]");
+            let valid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.classList.add("shake");
+                    setTimeout(() => input.classList.remove("shake"), 500);
+                    valid = false;
+                }
+            });
+        
+            if (!valid) {
+                event.preventDefault();
+                alert("Please fill all required fields! 🚨");
+            }
+        });
+    </script>
+    <!-- Success Stories -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-6 text-center">
+        <!-- Lottie Animation Container -->
+        <div id="lottie-success" class="w-12 h-12 mx-auto"></div>
+        <h2 class="text-6xl font-bold text-green-800 mt-[-20px] mb-10">Success Stories</h2>
+    </div>
+    
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10"> 
+            <!-- Success Story Card 1 -->
+            <div class="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <div class="flex items-center mb-6">
+                    <img src="/static/f1.jpeg" alt="Farmer" class="h-14 w-14 rounded-full object-cover border-2 border-green-500">
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-green-700">Rajesh Kumar</h3>
+                        <p class="text-gray-600">Maharashtra Farmer</p>
+                    </div>
+                </div>
+                <p class="text-xl text-gray-700 italic">
+                    "Using CropSense, I increased my crop yield by 40% and reduced water usage by 25%. 
+                    The recommendations were perfect for my land."
+                </p>
+                <div class="mt-4 flex justify-end">
+                    <span class="text-green-600">✓ Verified Success</span>
+                </div>
+            </div>
+
+            <!-- Success Story Card 2 -->
+            <div class="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <div class="flex items-center mb-6">
+                    <img src="/static/f2.jpeg" alt="Farmer" class="h-14 w-14 rounded-full object-cover border-2 border-green-500">
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-green-700">Lakshmi Devi</h3>
+                        <p class="text-gray-600">Karnataka Farmer</p>
+                    </div>
+                </div>
+                <p class="text-xl text-gray-700 italic">
+                    "Thank you for introducing crop rotation! My soil is healthier, and my yields have improved. 
+                    Truly a game-changer for my farm!"
+                </p>
+                <div class="mt-4 flex justify-end">
+                    <span class="text-green-600">✓ Verified Success</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Lottie Animation -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var successAnimation = bodymovin.loadAnimation({
+            container: document.getElementById('lottie-success'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '/static/123.json',
+            rendererSettings: {
+                preserveAspectRatio: 'xMidYMid meet'
+            }
+        });
+        
+        // Set the size directly on the container
+        document.getElementById('lottie-success').style.width = '200px';
+        document.getElementById('lottie-success').style.height = '200px';
+    });
+</script>
+
+<!-- Footer -->
+<footer class="bg-green-800 text-white py-12 rounded-t-3xl shadow-lg">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+            <!-- About Section -->
+            <div class="transform hover:scale-105 transition-transform duration-300">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <span class="inline-block mr-2">🌱</span>
+                    About CropSense
+                </h3>
+                <p class="text-lg text-green-200">
+                    At CropSense, we are dedicated to transforming agriculture through data-driven insights. 
+                    Our AI-powered platform helps farmers make informed decisions about crop selection for better yields.
+                </p>
+            </div>
+            
+            <!-- Empty column for spacing -->
+            <div></div>
+            
+            <!-- Contact Us Section -->
+            <div id="contact" class="transform hover:scale-105 transition-transform duration-300">
+                <h3 class="text-2xl font-bold mb-4 flex items-center">
+                    <span class="inline-block mr-2">📞</span>
+                    Contact Us
+                </h3>
+                <ul class="text-lg space-y-3 text-green-200">
+                    <li class="flex items-center">
+                        <span class="mr-2">✉️</span>
+                        <span>support@CropSense.com</span>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="mr-2">📱</span>
+                        <span>1800-FARM-HELP</span>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="mr-2">🏢</span>
+                        <span>Tech Park, Greater Noida</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Map and Social Media Section -->
+            <div class="transform hover:scale-105 transition-transform duration-300">
+                <!-- Map Container -->
+                <div class="contact-map mb-6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3497.115521170887!2d77.58973477552295!3d28.459497794823437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdc013a8f5ff5%3A0x73bcdde00e6d6b3a!2sBennett%20University!5e0!3m2!1sen!2sin!4v1711950160253!5m2!1sen!2sin" 
+                      allowfullscreen="" 
+                      width="600"
+                      height="450"
+                      style="border:0;"
+                      loading="lazy" 
+                      referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <!-- Social Media Section -->
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="inline-block mr-2">🌐</span>
+                    Follow Us
+                </h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-green-200 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <img src="/api/placeholder/24/24" alt="Facebook" class="h-8 w-8 rounded-full bg-green-700 p-1">
+                    </a>
+                    <a href="#" class="text-green-200 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <img src="/api/placeholder/24/24" alt="Twitter" class="h-8 w-8 rounded-full bg-green-700 p-1">
+                    </a>
+                    <a href="#" class="text-green-200 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <img src="/api/placeholder/24/24" alt="Instagram" class="h-8 w-8 rounded-full bg-green-700 p-1">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright Section -->
+        <div class="mt-10 pt-8 border-t border-green-700 text-center">
+            <p class="text-green-200">&copy; 2024 CropSense. All rights reserved.</p>
+            <div class="mt-4 flex justify-center space-x-4 text-sm">
+                <a href="#" class="text-green-200 hover:text-white transition-colors duration-300">Privacy Policy</a>
+                <a href="#" class="text-green-200 hover:text-white transition-colors duration-300">Terms of Service</a>
+                <a href="#" class="text-green-200 hover:text-white transition-colors duration-300">FAQ</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    /* Container for the map */
+    .contact-map {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* iframe styling for the embedded Google Map */
+    .contact-map iframe {
+        width: 100%;
+        height: 200px;
+        border: 0;
+        transition: all 0.3s ease;
+    }
+    
+    /* Success story cards hover effect */
+    .hover\:scale-105:hover {
+        transform: scale(1.05);
+    }
+    
+    /* Optional: Add responsive behavior for smaller screens */
+    @media screen and (max-width: 768px) {
+        .contact-map iframe {
+            height: 250px;
+        }
+    }
+</style>
+
+<script>
+    // Smooth scrolling for navigation links
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add animation to success story cards when they come into view
+        const cards = document.querySelectorAll('.grid > div');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+        
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    });
+</script>
+</body>
+</html>
